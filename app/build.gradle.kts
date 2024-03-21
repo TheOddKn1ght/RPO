@@ -2,9 +2,13 @@ plugins {
     id("com.android.application")
 }
 
+
+
 android {
     namespace = "com.example.rpolab1"
     compileSdk = 34
+
+
 
     defaultConfig {
         applicationId = "com.example.rpolab1"
@@ -14,7 +18,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
+
 
     buildTypes {
         release {

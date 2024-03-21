@@ -31,7 +31,22 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
-target_link_libraries(${CMAKE_PROJECT_NAME}
-        # List libraries link to the target library
-        android
-        log)
+target_link_libraries( # Specifies the target library.
+        rpolab1
+
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib})
+
+add_library(spdlog STATIC IMPORTED)
+set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
+        /home/oddknight/AndroidStudioProjects/libs/spdlog/build/${ANDROID_ABI}/libspdlog.a)
+target_include_directories(rpolab1 PUBLIC
+        /home/oddknight/AndroidStudioProjects/libs/spdlog/include)
+
+target_link_libraries( # Specifies the target library.
+        native-lib
+        spdlog
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib} )
