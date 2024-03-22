@@ -11,8 +11,6 @@
 auto android_logger = spdlog::android_logger_mt("android", "fclient_ndk");
 
 extern "C" JNIEXPORT jstring
-
-extern "C" jstring
 Java_com_example_rpolab1_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {

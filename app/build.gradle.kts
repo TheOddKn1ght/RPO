@@ -19,6 +19,15 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        externalNativeBuild {
+            cmake {
+                cppFlags("")
+            }
+        }
+        ndk {
+            abiFilters.add("x86")
+            abiFilters.add("x86_64")
+        }
     }
 
 

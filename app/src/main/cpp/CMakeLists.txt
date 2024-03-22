@@ -24,29 +24,16 @@ project("rpolab1")
 # System.loadLibrary() and pass the name of the library defined here;
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
-add_library(${CMAKE_PROJECT_NAME} SHARED
-        # List C/C++ source files with relative paths to this CMakeLists.txt.
-        native-lib.cpp)
-
-# Specifies libraries CMake should link to your target library. You
-# can link libraries from various origins, such as libraries defined in this
-# build script, prebuilt third-party libraries, or Android system libraries.
-target_link_libraries( # Specifies the target library.
-        rpolab1
-
-        # Links the target library to the log library
-        # included in the NDK.
-        ${log-lib})
-
 add_library(spdlog STATIC IMPORTED)
 set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
-        /home/oddknight/AndroidStudioProjects/libs/spdlog/build/${ANDROID_ABI}/libspdlog.a)
-target_include_directories(rpolab1 PUBLIC
+        /home/oddknight/AndroidStudioProjects/libs/build/x86_64/libspdlog.a)
+target_include_directories(spdlog INTERFACE
         /home/oddknight/AndroidStudioProjects/libs/spdlog/include)
 
-target_link_libraries( # Specifies the target library.
-        native-lib
+add_library(${CMAKE_PROJECT_NAME} SHARED
+        native-lib.cpp)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
         spdlog
-        # Links the target library to the log library
-        # included in the NDK.
-        ${log-lib} )
+        android
+        log)
