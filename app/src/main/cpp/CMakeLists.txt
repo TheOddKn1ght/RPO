@@ -25,15 +25,20 @@ project("rpolab1")
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
 add_library(spdlog STATIC IMPORTED)
+add_library(mbedcrypto SHARED IMPORTED)
 set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
         /home/oddknight/AndroidStudioProjects/libs/build/x86_64/libspdlog.a)
+set_target_properties(mbedcrypto PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_CURRENT_SOURCE_DIR}/../nativeLibs/${ANDROID_ABI}/libmbedcrypto.so)
 target_include_directories(spdlog INTERFACE
-        /home/oddknight/AndroidStudioProjects/libs/spdlog/include)
+        /home/oddknight/AndroidStudioProjects/libs/spdlog/include
+        /home/oddknight/AndroidStudioProjects/libs/mbedtls/mbedtls/include)
 
 add_library(${CMAKE_PROJECT_NAME} SHARED
         native-lib.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
+        mbedcrypto
         spdlog
         android
         log)

@@ -16,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    static {
+        System.loadLibrary("native-lib");
+        System.loadLibrary("mbedcrypto");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,4 +37,6 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    public static native int initRng();
+    public static native byte[] randomBytes(int no);
 }
