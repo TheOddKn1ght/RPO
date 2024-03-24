@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     static {
-        System.loadLibrary("native-lib");
+        //System.loadLibrary("native-lib");
         System.loadLibrary("mbedcrypto");
     }
     @Override
@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = binding.sampleText;
         tv.setText(stringFromJNI());
+
+        int res = initRng();
+        byte[] v = randomBytes(10);
+        tv.setText(String.valueOf(v));
     }
 
     /**
